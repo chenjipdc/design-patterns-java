@@ -111,3 +111,18 @@ class Singleton6 {
         }
     }
 }
+
+/**
+ * 通过静态内部类，也是通过类的加载保证。
+ */
+class Singleton7 {
+    int a = 1;
+    public static Singleton7 getInstance(){
+        return InnerSingleton.INSTANCE;
+    }
+
+    static class InnerSingleton {
+        private final static Singleton7 INSTANCE = new Singleton7();
+    }
+}
+

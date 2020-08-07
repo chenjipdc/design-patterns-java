@@ -136,4 +136,25 @@ public class DP01_TestSingleton {
         }
         assert set.size() == 1;
     }
+
+    /**
+     * 怎么测也不会出异常
+     *
+     * @throws InterruptedException
+     */
+    @Test
+    public void testSingleton7() throws InterruptedException {
+        final Set<String> set = new ConcurrentSkipListSet<>();
+        for (int i = 0; i < 50; i++) {
+            new Thread(() -> {
+                Singleton7 instance = Singleton7.getInstance();
+                set.add(instance.toString());
+            }).start();
+        }
+        Thread.sleep(1000);
+        for (String s : set) {
+            System.out.println(s);
+        }
+        assert set.size() == 1;
+    }
 }
